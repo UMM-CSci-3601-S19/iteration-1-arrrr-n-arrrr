@@ -1,6 +1,11 @@
 export interface Ride {
   _id: string;
-  title: string;
+  driver: {User, Vehicle}
+  riders: User[]
   destination: string;
-  body: string;
+  origin: string;
+  roundTrip: boolean;
+  departureTime: Date;
+  notes: string;
+  driving: boolean;
 }
