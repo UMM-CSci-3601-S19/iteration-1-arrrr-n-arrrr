@@ -1,3 +1,5 @@
+import { User } from '../users/user'
+
 export interface Ride {
   _id: string;
   driver: {User, Vehicle}
