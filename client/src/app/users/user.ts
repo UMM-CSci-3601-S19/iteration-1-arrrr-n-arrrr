@@ -1,7 +1,8 @@
-export interface User {
-  _id: string;
-  name: string;
-  age: number;
-  company: string;
+import { Vehicle } from '../vehicles/vehicle'
+
+export interface User{
+  vehicles: Vehicle[];
   email: string;
+  phone: string[];
+  name: string
 }
