@@ -24,14 +24,14 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput id="rideDriving" #input type="search" placeholder="Search for driver or rider"
+          <input matInput id="rideDriving" #input type="Search" placeholder="Search for driver or rider"
                  [(ngModel)]="rideDriving"/>
           <button mat-button id="drivingClearSearch" type="button" *ngIf="rideDriving" matSuffix mat-icon-button
-                  aria-label="clear" (click)="rideDriving='';loadService()">
+                  aria-label="clear" (click)="rideDriving= ''; loadService()">
             <mat-icon>close</mat-icon>
           </button>
-
         </mat-form-field>
+
         <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">Submit
         </button>
 
@@ -40,13 +40,13 @@
                                *ngFor="let ride of this.filterRides(rideDestination, rideOrigin)">
 
             <mat-expansion-panel-header>
-              <!--Could be useful later-->
-              <!--<mat-panel-title matTooltip="email: {{user.email}}">{{user.name}}</mat-panel-title>-->
+              <mat-panel-title matTooltip="Destination: {{ride.destination}}">{{ride.destination}}</mat-panel-title>
             </mat-expansion-panel-header>
 
             <mat-panel-description>Destination: {{ride.destination}}</mat-panel-description>
             <mat-panel-description>Origin: {{ride.origin}} </mat-panel-description>
             <mat-panel-description>Notes: {{ride.notes}} </mat-panel-description>
+            <mat-panel-description>Is Driving: {{ride.driving}} </mat-panel-description>
 
           </mat-expansion-panel>
 
