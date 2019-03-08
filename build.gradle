@@ -8,7 +8,7 @@ task clearMongoDB(type: Exec) {
   args = ["dev", "--eval", "printjson(db.dropDatabase())"]
 }
 
-task seedrideData(type: Exec) {
+task seedRideData(type: Exec) {
   executable = "mongoimport"
   args = ["-d", "dev", "-c", "rides", "--file", "rides.seed.json", "--jsonArray"]
 }
@@ -22,5 +22,5 @@ task seedMongoDB {
   group = "application"
 }
 seedMongoDB.dependsOn(clearMongoDB)
-seedMongoDB.dependsOn(seedToDoData)
+seedMongoDB.dependsOn(seedRideData)
 seedMongoDB.dependsOn(seedUserData)
