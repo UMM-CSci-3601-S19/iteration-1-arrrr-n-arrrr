@@ -65,7 +65,7 @@ export class RideListService {
     this.rideUrl = this.rideUrl.substring(0, start) + this.rideUrl.substring(end);
   }
 
-  addNewUser(newRide: Ride): Observable<string> {
+  addNewRide(newRide: Ride): Observable<string> {
     const httpOptions = {
       headers: new HttpHeaders({
         // We're sending JSON
