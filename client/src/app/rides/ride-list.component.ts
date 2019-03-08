@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
 import {AddRideComponent} from './add-ride.component';
 
+
 @Component({
   selector: 'ride-list-component',
   templateUrl: 'ride-list.component.html',
@@ -20,7 +21,7 @@ export class RideListComponent implements OnInit {
   // We should rename them to make that clearer.
   public rideDestination: string;
   public rideOrigin: string;
-  public rideDriving: boolean;
+  public rideDriving: string;
 
   // The ID of the
   private highlightedID: string = '';
@@ -35,14 +36,14 @@ export class RideListComponent implements OnInit {
   }
 
   openDialog(): void {
-    const newRide: Ride = {_id: '', destination: '', origin: '', notes: '',
-      driving: null, driver: null, riders: null, roundTrip: null, departureTime: null};
+    const newRide: Ride = {_id: '', destination: '', origin: '', notes: '', driving: ''};
     const dialogRef = this.dialog.open(AddRideComponent, {
       width: '500px',
       data: {ride: newRide}
     });
 
     dialogRef.afterClosed().subscribe(newRide => {
+
       if (newRide != null) {
         this.rideListService.addNewRide(newRide).subscribe(
           result => {
@@ -80,6 +81,8 @@ export class RideListComponent implements OnInit {
         return !searchOrigin || ride.destination.toLowerCase().indexOf(searchOrigin) !== -1;
       });
     }
+
+    return this.filteredRides;
   }
 
   /**
