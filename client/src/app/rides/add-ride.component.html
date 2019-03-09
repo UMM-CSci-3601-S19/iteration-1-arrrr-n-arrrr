@@ -28,9 +28,20 @@
       <mat-form-field flex>
         <input matInput #input id="notesField" placeholder="Enter information about your ride" [(ngModel)]="data.ride.notes"
                formControlName="notes" required>
-        <mat-error *ngFor="let validation of add_ride_validation_messages.destination">
+        <mat-error *ngFor="let validation of add_ride_validation_messages.notes">
           <mat-error class="error-message" id="notes-error"
                      *ngIf="addRideForm.get('notes').hasError(validation.type) && (addRideForm.get('notes').dirty || addRideForm.get('notes').touched)">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field flex>
+        <input matInput #input id="drivingField" placeholder="Driving? (true or false)" [(ngModel)]="data.ride.driving"
+               formControlName="driving" required>
+        <mat-error *ngFor="let validation of add_ride_validation_messages.driving">
+          <mat-error class="error-message" id="driving-error"
+                     *ngIf="addRideForm.get('driving').hasError(validation.type) && (addRideForm.get('driving').dirty || addRideForm.get('driving').touched)">
             {{validation.message}}
           </mat-error>
         </mat-error>
