@@ -36,7 +36,7 @@ export class RideListComponent implements OnInit {
   }
 
   openDialog(): void {
-    const newRide: Ride = {_id: '', destination: '', origin: '', notes: '', driving: ''};
+    const newRide: Ride = {_id: '', destination: '', origin: '', notes: '', driving: null};
     const dialogRef = this.dialog.open(AddRideComponent, {
       width: '500px',
       data: {ride: newRide}
@@ -110,6 +110,7 @@ export class RideListComponent implements OnInit {
 
   ///FIX THIS ///
   loadService(): void {
+    console.log("loadservice called")
     this.rideListService.getRides(this.rideDriving).subscribe(
       rides => {
         this.rides = rides;

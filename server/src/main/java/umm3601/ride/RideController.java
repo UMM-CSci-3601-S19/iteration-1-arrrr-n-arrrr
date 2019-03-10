@@ -70,10 +70,14 @@ public class RideController {
 
     if (queryParams.containsKey("driving")) {
       String targetDriving = (queryParams.get("driving")[0]);
-      Document contentRegQuery = new Document();
-      contentRegQuery.append("$regex", targetDriving);
-      contentRegQuery.append("$options", "i");
-      filterDoc = filterDoc.append("driving", contentRegQuery);
+      boolean targetDrivingBool;
+      if (targetDriving.equals("true")) {
+        targetDrivingBool = true;
+      } else {
+        targetDrivingBool = false;
+      }
+
+      filterDoc = filterDoc.append("driving", targetDrivingBool);
     }
 
     //FindIterable comes from mongo, Document comes from Gson
