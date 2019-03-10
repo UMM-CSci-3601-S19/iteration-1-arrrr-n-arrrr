@@ -78,7 +78,7 @@ export class RideListComponent implements OnInit {
       searchOrigin = searchOrigin.toLocaleLowerCase();
 
       this.filteredRides = this.filteredRides.filter(ride => {
-        return !searchOrigin || ride.destination.toLowerCase().indexOf(searchOrigin) !== -1;
+        return !searchOrigin || ride.origin.toLowerCase().indexOf(searchOrigin) !== -1;
       });
     }
 

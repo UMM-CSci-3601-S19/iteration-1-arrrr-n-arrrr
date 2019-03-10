@@ -3,5 +3,5 @@ export interface Ride {
   destination: string;
   origin: string;
   notes: string;
-  driving: string;
+  driving: boolean;
 }
