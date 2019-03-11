@@ -35,8 +35,12 @@ export class RideListComponent implements OnInit {
     return ride._id['$oid'] === this.highlightedID;
   }
 
+
+
+  //forbidden zone
+
   openDialog(): void {
-    const newRide: Ride = {_id: '', destination: '', origin: '', notes: '', driving: ''};
+    const newRide: Ride = {_id: '', destination: '', origin: '', notes: '', driving: null};
     const dialogRef = this.dialog.open(AddRideComponent, {
       width: '500px',
       data: {ride: newRide}
@@ -78,7 +82,7 @@ export class RideListComponent implements OnInit {
       searchOrigin = searchOrigin.toLocaleLowerCase();
 
       this.filteredRides = this.filteredRides.filter(ride => {
-        return !searchOrigin || ride.destination.toLowerCase().indexOf(searchOrigin) !== -1;
+        return !searchOrigin || ride.origin.toLowerCase().indexOf(searchOrigin) !== -1;
       });
     }
 
