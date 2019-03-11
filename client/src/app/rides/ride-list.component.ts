@@ -113,6 +113,7 @@ export class RideListComponent implements OnInit {
   }
 
   loadService(): void {
+    console.log("loadservice called")
     this.rideListService.getRides(this.rideDriving).subscribe(
       rides => {
         this.rides = rides;

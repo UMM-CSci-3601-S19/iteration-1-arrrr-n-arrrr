@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
+import {MatRadioModule} from '@angular/material/radio';
 
 import {HttpClientModule} from '@angular/common/http';
 import {AppComponent} from './app.component';
@@ -27,6 +28,7 @@ import {AddRideComponent} from "./rides/add-ride.component";
     HttpClientModule,
     Routing,
     CustomModule,
+    MatRadioModule,
   ],
 
   declarations: [
