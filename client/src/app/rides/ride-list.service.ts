@@ -25,19 +25,24 @@ export class RideListService {
 
   filterByDriving(rideDriving?: string): void {
     if (!(rideDriving == null || rideDriving === '')) {
+
       if (this.parameterPresent('driving=')) {
         // there was a previous search by driving that we need to clear
         this.removeParameter('driving=');
       }
+
       if (this.rideUrl.indexOf('?') !== -1) {
-        // there was already some information passed in this url
+
+        // console.log("there was already some information passed in this url");
         this.rideUrl += 'driving=' + rideDriving + '&';
+
+
       } else {
-        // this was the first bit of information to pass in the url
+        // console.log("this was the first bit of information to pass in the url");
         this.rideUrl += '?driving=' + rideDriving + '&';
       }
     } else {
-      // there was nothing in the box to put onto the URL... reset
+      // console.log("there was nothing in the box to put onto the URL... reset");
       if (this.parameterPresent('driving=')) {
         let start = this.rideUrl.indexOf('driving=');
         const end = this.rideUrl.indexOf('&', start);
@@ -45,6 +50,7 @@ export class RideListService {
           start = start - 1;
         }
         this.rideUrl = this.rideUrl.substring(0, start) + this.rideUrl.substring(end + 1);
+
       }
     }
   }
