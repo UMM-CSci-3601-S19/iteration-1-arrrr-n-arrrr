@@ -18,7 +18,7 @@ export class AddRideComponent implements OnInit {
 
   // not sure if this name is magical and making it be found or if I'm missing something,
   // but this is where the red text that shows up (when there is invalid input) comes from
-  add_user_validation_messages = {
+  add_ride_validation_messages = {
 
     'notes': [
       {type: 'required', message: 'Notes are required'}
@@ -28,7 +28,7 @@ export class AddRideComponent implements OnInit {
       {type: 'required', message: 'Destination is required'},
       {type: 'minlength', message: 'Destination must be at least 3 characters long'},
       {type: 'maxlength', message: 'Destination cannot be more than 30 characters long'},
-      {type: 'pattern', message: 'Destination must contain only numbers, letters, punctuation, or paranthesis'}
+      {type: 'pattern', message: 'Destination must contain only numbers, letters, or punctuation'}
     ],
 
     'origin' : [
@@ -39,7 +39,10 @@ export class AddRideComponent implements OnInit {
     ],
 
     'driving' : [
-      {type: 'required', message: 'You must indicate whether you are the driver or not'}
+      {type: 'required', message: 'You must indicate whether you are the driver or not'},
+      {type: 'minlength', message: 'Driving must be at least 3 characters long'},
+      {type: 'maxlength', message: 'Origin cannot be more than 30 characters long'},
+      {type: 'pattern', message: 'Origin must contain only letters, punctuation, or paranthesis'}
     ]
 
   };
@@ -50,25 +53,31 @@ export class AddRideComponent implements OnInit {
     this.addRideForm = this.fb.group({
       // Notes is only required, with few restrictions.
       notes: new FormControl('notes', Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(100),
+        Validators.pattern('[a-zA-Z0-9\\s.?!()\,\'\"]+'),
       ])),
 
       destination: new FormControl('destination', Validators.compose([
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(30),
-        Validators.pattern('[a-zA-Z0-9.?!(),\'\"]'),
+        Validators.pattern('[a-zA-Z0-9\\s.?!()\,\'\"]+'),
       ])),
 
       origin: new FormControl('origin', Validators.compose([
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(30),
-        Validators.pattern('[a-zA-Z0-9.?!(),\'\"]'),
+        Validators.pattern('[a-zA-Z0-9\\s.?!()\,\'\"]+'),
       ])),
 
       driving: new FormControl('driving', Validators.compose([
-        Validators.required
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(30),
+        Validators.pattern('[a-zA-Z0-9\\s.?!()\,\'\"]+'),
       ])),
 
     })

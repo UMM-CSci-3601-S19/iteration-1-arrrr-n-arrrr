@@ -35,6 +35,10 @@ export class RideListComponent implements OnInit {
     return ride._id['$oid'] === this.highlightedID;
   }
 
+
+
+  //forbidden zone
+
   openDialog(): void {
     const newRide: Ride = {_id: '', destination: '', origin: '', notes: '', driving: null};
     const dialogRef = this.dialog.open(AddRideComponent, {
@@ -108,7 +112,6 @@ export class RideListComponent implements OnInit {
     return rides;
   }
 
-  ///FIX THIS ///
   loadService(): void {
     console.log("loadservice called")
     this.rideListService.getRides(this.rideDriving).subscribe(

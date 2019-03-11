@@ -23,24 +23,31 @@
                  (input)="rideOrigin = $event.target.value">
         </mat-form-field>
 
-        <mat-form-field>
-          <input matInput id="rideDriving" #input type="Search" placeholder="Search for driver or rider"
-                 [(ngModel)]="rideDriving"/>
-          <button mat-button id="drivingClearSearch" type="button" *ngIf="rideDriving" matSuffix mat-icon-button
-                  aria-label="clear" (click)="rideDriving= ''; loadService()">
-            <mat-icon>close</mat-icon>
-          </button>
-        </mat-form-field>
+        <mat-radio-group [(ngModel)] = "rideDriving">
+          I am...
+          <mat-radio-button [value] = "true"> driving</mat-radio-button>
+          <mat-radio-button [value] = "false"> looking for a ride</mat-radio-button>
+        </mat-radio-group>
+
+        <!--<mat-form-field>-->
+          <!--<input matInput id="rideDriving" #input type="search" placeholder="Search for driver or rider"-->
+                 <!--[(ngModel)]="rideDriving"/>-->
+          <!--<button mat-button id="drivingClearSearch" type="button" *ngIf="rideDriving" matSuffix mat-icon-button-->
+                  <!--aria-label="clear" (click)="rideDriving= ''; loadService()">-->
+            <!--<mat-icon>close</mat-icon>-->
+          <!--</button>-->
+        <!--</mat-form-field>-->
 
         <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">Submit
         </button>
+
 
         <mat-accordion *ngIf="rides; else ridesError">
           <mat-expansion-panel #elem class="rides" [id]="ride._id" [expanded]="this.isHighlighted(ride)"
                                *ngFor="let ride of this.filterRides(rideDestination, rideOrigin)">
 
             <mat-expansion-panel-header>
-              <mat-panel-title matTooltip="Destination: {{ride.destination}}">{{ride.destination}}</mat-panel-title>
+              <mat-panel-title matTooltip="Destination: {{ride.destination}}"> {{ride.destination}} </mat-panel-title>
             </mat-expansion-panel-header>
 
             <mat-panel-description>Destination: {{ride.destination}}</mat-panel-description>
@@ -51,6 +58,8 @@
           </mat-expansion-panel>
 
         </mat-accordion>
+
+
         <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
         <ng-template #ridesError>
           <mat-error>

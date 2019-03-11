@@ -76,7 +76,6 @@ public class RideController {
       } else {
         targetDrivingBool = false;
       }
-
       filterDoc = filterDoc.append("driving", targetDrivingBool);
     }
 
