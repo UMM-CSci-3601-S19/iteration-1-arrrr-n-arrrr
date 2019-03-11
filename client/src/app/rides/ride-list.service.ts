@@ -26,8 +26,9 @@ export class RideListService {
 
   filterByDriving(rideDriving?: string): void {
     //dead zone
-    
-    if (!(rideDriving == "true") || (rideDriving == "false")) {
+
+
+    if (!(rideDriving = 'true') || (rideDriving = 'false')) {
       rideDriving = '';
     }
 
