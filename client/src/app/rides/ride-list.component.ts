@@ -108,7 +108,6 @@ export class RideListComponent implements OnInit {
     return rides;
   }
 
-  ///FIX THIS ///
   loadService(): void {
     this.rideListService.getRides(this.rideDriving).subscribe(
       rides => {
