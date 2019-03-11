@@ -1,10 +1,8 @@
-<!-- example from
-https://github.com/AngularTemplates/angular-forms-and-validations/blob/master/src/app/form-component/form.component.html
-is potentially helpful and contributed to the shaping of this example -->
 <div class="add-user">
   <form [formGroup]="addUserForm">
     <h2 mat-dialog-title>New User</h2>
     <mat-dialog-content layout="column">
+
       <mat-form-field flex>
         <input matInput #input id="nameField" placeholder="Name" [(ngModel)]="data.user.name" formControlName="name"
                required>
@@ -15,6 +13,7 @@ is potentially helpful and contributed to the shaping of this example -->
           </mat-error>
         </mat-error>
       </mat-form-field>
+
       <mat-form-field flex>
         <input matInput #input id="ageField" type="number" placeholder="Age" [(ngModel)]="data.user.age"
                formControlName="age">
@@ -50,4 +49,3 @@ is potentially helpful and contributed to the shaping of this example -->
     </mat-dialog-actions>
   </form>
 </div>
-

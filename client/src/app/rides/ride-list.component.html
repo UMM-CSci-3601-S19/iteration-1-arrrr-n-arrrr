@@ -1,0 +1,67 @@
+
+<!--We Still need to implement a radio button for submitting driver or rider-->
+
+<div>
+  <button id="addNewRide" mat-raised-button (click)="openDialog()">Add New Ride</button>
+</div>
+
+
+<div layout-gt-sm="row">
+  <div flex-gt-sm="80" flex-offset-gt-sm="10">
+    <mat-card>
+      <mat-card-title id="ride-list-title">Rides</mat-card-title>
+      <mat-divider></mat-divider>
+
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput id="rideDestination" #input type="text" placeholder="Filter by destination"
+                 (input)="rideDestination = $event.target.value">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput id="rideOrigin" #input type="text" placeholder="Filter by origin"
+                 (input)="rideOrigin = $event.target.value">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput id="rideDriving" #input type="search" placeholder="Search for driver or rider"
+                 [(ngModel)]="rideDriving"/>
+          <button mat-button id="drivingClearSearch" type="button" *ngIf="rideDriving" matSuffix mat-icon-button
+                  aria-label="clear" (click)="rideDriving= ''; loadService()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">Submit
+        </button>
+
+        <mat-accordion *ngIf="rides; else ridesError">
+          <mat-expansion-panel #elem class="rides" [id]="ride._id" [expanded]="this.isHighlighted(ride)"
+                               *ngFor="let ride of this.filterRides(rideDestination, rideOrigin)">
+
+            <mat-expansion-panel-header>
+              <mat-panel-title matTooltip="Destination: {{ride.destination}}"> {{ride.destination}} </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-panel-description>Destination: {{ride.destination}}</mat-panel-description>
+            <mat-panel-description>Origin: {{ride.origin}} </mat-panel-description>
+            <mat-panel-description>Notes: {{ride.notes}} </mat-panel-description>
+            <mat-panel-description>Is Driving: {{ride.driving}} </mat-panel-description>
+
+          </mat-expansion-panel>
+
+        </mat-accordion>
+        <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
+        <ng-template #ridesError>
+          <mat-error>
+            There was a problem loading the rides. Possibly the server is down or perhaps there are network
+            issues.
+          </mat-error>
+          <mat-error>
+            Please wait a bit and try again or start the server.
+          </mat-error>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
