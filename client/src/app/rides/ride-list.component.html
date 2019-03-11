@@ -24,7 +24,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput id="rideDriving" #input type="Search" placeholder="Search for driver or rider"
+          <input matInput id="rideDriving" #input type="search" placeholder="Search for driver or rider"
                  [(ngModel)]="rideDriving"/>
           <button mat-button id="drivingClearSearch" type="button" *ngIf="rideDriving" matSuffix mat-icon-button
                   aria-label="clear" (click)="rideDriving= ''; loadService()">
@@ -40,7 +40,7 @@
                                *ngFor="let ride of this.filterRides(rideDestination, rideOrigin)">
 
             <mat-expansion-panel-header>
-              <mat-panel-title matTooltip="Destination: {{ride.destination}}">{{ride.destination}}</mat-panel-title>
+              <mat-panel-title matTooltip="Destination: {{ride.destination}}"> {{ride.destination}} </mat-panel-title>
             </mat-expansion-panel-header>
 
             <mat-panel-description>Destination: {{ride.destination}}</mat-panel-description>
