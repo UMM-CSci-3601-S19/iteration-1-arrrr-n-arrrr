@@ -6,6 +6,7 @@ import {Observable} from 'rxjs/Observable';
 import {Ride} from './ride';
 import {environment} from '../../environments/environment';
 
+
 @Injectable()
 export class RideListService {
   readonly baseUrl: string = environment.API_URL + 'rides';
@@ -24,6 +25,7 @@ export class RideListService {
   }
 
   filterByDriving(rideDriving?: string): void {
+
 
     if (!(rideDriving == null || rideDriving === '')) {
 
