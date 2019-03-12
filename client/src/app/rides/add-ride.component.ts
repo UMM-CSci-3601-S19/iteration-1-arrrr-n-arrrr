@@ -6,6 +6,7 @@ import {FormControl, Validators, FormGroup, FormBuilder} from "@angular/forms";
 
 @Component({
   selector: 'add-ride.component',
+  styleUrls: ['./add-ride.component.css'],
   templateUrl: 'add-ride.component.html',
 })
 export class AddRideComponent implements OnInit {
@@ -21,7 +22,10 @@ export class AddRideComponent implements OnInit {
   add_ride_validation_messages = {
 
     'notes': [
-      {type: 'required', message: 'Notes are required'}
+      {type: 'required', message: 'Notes are required'},
+      {type: 'minlength', message: 'Notes must be at least 3 characters long'},
+      {type: 'maxlength', message: 'Notes cannot be more than 100 characters long'},
+      {type: 'pattern', message: 'Destination must contain only numbers, letters, or punctuation'},
     ],
 
     'destination' : [
@@ -40,9 +44,6 @@ export class AddRideComponent implements OnInit {
 
     'driving' : [
       {type: 'required', message: 'You must indicate whether you are the driver or not'},
-      {type: 'minlength', message: 'Driving must be at least 3 characters long'},
-      {type: 'maxlength', message: 'Origin cannot be more than 30 characters long'},
-      {type: 'pattern', message: 'Origin must contain only letters, punctuation, or paranthesis'}
     ]
 
   };
@@ -55,8 +56,8 @@ export class AddRideComponent implements OnInit {
       notes: new FormControl('notes', Validators.compose([
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(100),
-        Validators.pattern('[a-zA-Z0-9\\s.?!()\,\'\"]+'),
+        Validators.maxLength(300),
+        Validators.pattern('[a-zA-Z0-9\\s.?!()\,\'\"\:\;]+'),
       ])),
 
       destination: new FormControl('destination', Validators.compose([
@@ -74,10 +75,7 @@ export class AddRideComponent implements OnInit {
       ])),
 
       driving: new FormControl('driving', Validators.compose([
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(30),
-        Validators.pattern('[a-zA-Z0-9\\s.?!()\,\'\"]+'),
+        Validators.required
       ])),
 
     })

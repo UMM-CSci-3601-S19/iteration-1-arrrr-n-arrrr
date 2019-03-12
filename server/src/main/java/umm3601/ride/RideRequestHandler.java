@@ -75,10 +75,12 @@ public class RideRequestHandler {
 
     Document newRide = Document.parse(req.body());
 
+    System.out.println(newRide);
+
     String destination = newRide.getString("destination");
     String origin = newRide.getString("origin");
     String notes = newRide.getString("notes");
-    String driving = newRide.getString("driving");
+    Boolean driving = newRide.getBoolean("driving");
 
     System.err.println("Adding new ride [destination=" + destination + ", origin=" + origin +
       " notes=" + notes + " driving=" + driving + ']');

@@ -98,15 +98,17 @@ public class RideController {
 
 
 
-  public String addNewRide(String destination, String origin, String notes, String driving) {
+  public String addNewRide(String destination, String origin, String notes, Boolean driving) {
 
     Document newRide = new Document();
+    newRide.append("driving", driving);
     newRide.append("destination", destination);
     newRide.append("origin", origin);
     newRide.append("notes", notes);
-    newRide.append("driving", driving);
+    System.out.println(newRide);
 
     try {
+      System.out.println(newRide);
       rideCollection.insertOne(newRide);
       ObjectId id = newRide.getObjectId("_id");
       System.err.println("Successfully added new ride [destination=" + destination +

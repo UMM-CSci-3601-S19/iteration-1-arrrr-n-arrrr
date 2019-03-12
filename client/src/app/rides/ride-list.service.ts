@@ -24,6 +24,11 @@ export class RideListService {
   }
 
   filterByDriving(rideDriving?: string): void {
+
+    if (! ((rideDriving === true) || (rideDriving === false)) ) {
+      rideDriving = '';
+    }
+
     if (!(rideDriving == null || rideDriving === '')) {
 
       if (this.parameterPresent('driving=')) {
@@ -72,6 +77,8 @@ export class RideListService {
   }
 
   addNewRide(newRide: Ride): Observable<string> {
+    console.log("made it to ride list service")
+    console.log(newRide)
     const httpOptions = {
       headers: new HttpHeaders({
         // We're sending JSON
@@ -84,6 +91,7 @@ export class RideListService {
     };
 
     // Send post request to add a new user with the user data as the body with specified headers.
+    console.log(this.rideUrl + '/new');
     return this.http.post<string>(this.rideUrl + '/new', newRide, httpOptions);
   }
 }

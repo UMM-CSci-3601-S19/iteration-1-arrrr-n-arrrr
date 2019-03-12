@@ -40,13 +40,14 @@ export class RideListComponent implements OnInit {
   //forbidden zone
 
   openDialog(): void {
-    const newRide: Ride = {_id: '', destination: '', origin: '', notes: '', driving: null};
+    const newRide: Ride = {_id: '', destination: '', origin: '', notes: '', driving: false};
     const dialogRef = this.dialog.open(AddRideComponent, {
-      width: '500px',
+      width: '500x',
       data: {ride: newRide}
     });
 
     dialogRef.afterClosed().subscribe(newRide => {
+      console.log(newRide);
 
       if (newRide != null) {
         this.rideListService.addNewRide(newRide).subscribe(
