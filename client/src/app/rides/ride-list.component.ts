@@ -3,6 +3,7 @@ import {RideListService} from './ride-list.service';
 import {Ride} from './ride';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
+import {MatRadioModule} from '@angular/material/radio';
 import {AddRideComponent} from './add-ride.component';
 
 

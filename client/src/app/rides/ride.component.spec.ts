@@ -72,7 +72,7 @@ describe('Ride component', () => {
 
   it('returns undefined for a ride to Mars', () => {
     rideComponent.setId('driving_to_Mars');
-    expect(rideComponent.ride).not.toBeDefined();
+    expect(rideComponent.ride).toBeUndefined();
   });
 
 });
