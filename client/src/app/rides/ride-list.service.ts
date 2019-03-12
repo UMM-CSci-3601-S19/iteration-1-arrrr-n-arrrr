@@ -25,10 +25,6 @@ export class RideListService {
 
   filterByDriving(rideDriving?: string): void {
 
-    if (! ((rideDriving === true) || (rideDriving === false)) ) {
-      rideDriving = '';
-    }
-
     if (!(rideDriving == null || rideDriving === '')) {
 
       if (this.parameterPresent('driving=')) {
