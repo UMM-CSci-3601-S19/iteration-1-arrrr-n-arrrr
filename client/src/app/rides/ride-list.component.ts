@@ -87,7 +87,6 @@ export class RideListComponent implements OnInit {
         return !searchOrigin || ride.origin.toLowerCase().indexOf(searchOrigin) !== -1;
       });
     }
-
     return this.filteredRides;
   }
 
