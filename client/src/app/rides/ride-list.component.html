@@ -2,7 +2,9 @@
 <!--We Still need to implement a radio button for submitting driver or rider-->
 
 <div>
-  <button id="addNewRide" mat-raised-button (click)="openDialog()">Add New Ride</button>
+  <button id="addNewRide" mat-raised-button (click)="openDialog()">
+    <mat-icon style="color: green;">add</mat-icon>
+    Add New Ride</button>
 </div>
 
 
@@ -44,13 +46,24 @@
 
         <div *ngIf="rides; else ridesError">
           <mat-card #elem class="rides" [id]="ride._id"
-                    *ngFor="let ride of this.filterRides(rideDestination, rideOrigin)">
-            <mat-card-title>Destination: {{ride.destination}}</mat-card-title>
+                    *ngFor="let ride of this.filterRides(rideDestination, rideOrigin)"
+                    [ngSwitch]="ride.driving">
+            <!--<mat-card-title>Destination: {{ride.destination}}</mat-card-title>-->
+            <mat-card-title *ngSwitchDefault style="background: #c2ff87">
+              <mat-icon style="color:green"> drive_eta</mat-icon>
+              Driving to: {{ride.destination}}
+            </mat-card-title>
+            <mat-card-title *ngSwitchCase=false style="background: #80ffff">
+              <mat-icon style="color: blue"> transfer_within_a_station </mat-icon>
+              Needs a ride to: {{ride.destination}}
+            </mat-card-title>
+
             <mat-card-content>Leaving from: {{ride.origin}}</mat-card-content>
             <mat-card-content>Notes: {{ride.notes}}</mat-card-content>
-            <mat-card-content>Is driving: {{ride.driving}}</mat-card-content>
           </mat-card>
         </div>
+
+        <!--transer_within_a_station-->
 
         <!--<mat-accordion *ngIf="rides; else ridesError">
           <mat-expansion-panel #elem class="rides" [id]="ride._id" [expanded]="this.isHighlighted(ride)"
