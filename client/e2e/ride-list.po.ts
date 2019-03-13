@@ -94,10 +94,10 @@ export class RidePage {
 
 
   elementExistsWithClass(classOfElement: string): promise.Promise<boolean> {
-    if (element(by.class(classOfElement)).isPresent()) {
-      this.highlightElement(by.class(classOfElement));
+    if (element(by.className(classOfElement)).isPresent()) {
+      this.highlightElement(by.className(classOfElement));
     }
-    return element(by.class(classOfElement)).isPresent();
+    return element(by.className(classOfElement)).isPresent();
   }
 
   elementExistsWithCss(cssOfElement: string): promise.Promise<boolean> {
@@ -122,5 +122,19 @@ export class RidePage {
     this.highlightElement(by.id(idOfField));
     return element(by.id(idOfField)).getText();
   }
+
+  /*delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+*/
+  /*sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async demo() {
+    console.log('Taking a break...');
+    await sleep(2000);
+    console.log('Two seconds later');
+  }*/
 
 }

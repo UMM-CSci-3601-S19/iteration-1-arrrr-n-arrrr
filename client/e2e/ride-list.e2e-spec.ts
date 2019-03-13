@@ -107,7 +107,7 @@ describe('Ride list', () => {
     page.navigateTo();
     page.getDriving(true); // true means, click on the radio button to display posts OFFERING rides
     page.getRides().then((rides) => {
-      expect(rides.length.toBe(22));
+      expect(rides.length).toBe(22);
     });
   });
 
@@ -115,7 +115,7 @@ describe('Ride list', () => {
     page.navigateTo();
     page.getDriving(true);
     page.getRides().then((rides) => {
-      expect(rides.length.toBe(22));
+      expect(rides.length).toBe(22);
     });
     page.getDriving(false);
     page.getRides().then((rides) => {
@@ -149,16 +149,17 @@ describe('Ride list', () => {
 
     it('Should actually add the ride with the information we put in the fields', () => {
       const isDriving = element(by.id('isDrivingFORM'));
-      page.field('destination').sendKeys('North Pole');
-      page.field('origin').sendKeys('South Pole');
-      page.field('notes').sendKeys('I will pay for gas!!!?');
+      page.field('destinationField').sendKeys('North Pole');
+      page.field('originField').sendKeys('South Pole');
+      page.field('notesField').sendKeys('I will pay for gas!!!?');
       isDriving.click();
       expect(page.button('confirmAddRideButton').isEnabled()).toBe(true);
 
       page.click('confirmAddRideButton');
+      page.typeADestination('North Pole');
+      page.typeAnOrigin('South Pole');
+      expect(page.getRides().length).toBe(1);
 
-
-      browser.wait(10000);
       expect(page.elementExistsWithClass('rides')).toBe(true);
 
       // left off //
