@@ -33,6 +33,12 @@ export class RidePage {
     input.sendKeys(destination);
   }
 
+  typeAnOrigin(origin: string) {
+    const input = element(by.id('rideOrigin'));
+    input.click();
+    input.sendKeys(origin);
+  }
+
   selectUpKey() {
     browser.actions().sendKeys(Key.ARROW_UP).perform();
   }
@@ -41,28 +47,24 @@ export class RidePage {
     browser.actions().sendKeys(Key.BACK_SPACE).perform();
   }
 
-  getCompany(company: string) {
-    const input = element(by.id('userCompany'));
+  getIsDriving(isDriving: boolean) {
+    if (isDriving) {
+      const input = element(by.id('driving'));
+    } else {
+      const input = element(by.id('notDriving'));
+    }
     input.click();
-    input.sendKeys(company);
     this.click('submit');
-  }
-
-  getUserByAge() {
-    const input = element(by.id('userName'));
-    input.click();
-    input.sendKeys(Key.TAB);
   }
 
   getUniqueRide(id: string) {
     const ride = element(by.id(id)).getText();
     this.highlightElement(by.id(id));
-
     return ride;
   }
 
-  getUsers() {
-    return element.all(by.className('users'));
+  getRides() {
+    return element.all(by.className('rides'));
   }
 
   elementExistsWithId(idOfElement: string): promise.Promise<boolean> {

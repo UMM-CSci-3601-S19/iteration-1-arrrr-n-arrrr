@@ -38,7 +38,9 @@ describe('Ride list', () => {
   it('should type something in filter destination box and check that it returned correct element', () => {
     page.navigateTo();
     page.typeADestination('all');
-    expect(page.getUniqueUser('kittypage@surelogic.com')).toEqual('Kitty Page');
+
+    expect(page.getUniqueRide('5c81d965be97c21bb4298e55').toEqual('Driving to: Alleghenyville , Minnesota'));
+
     page.backspace();
     page.typeAName('lynn');
     expect(page.getUniqueUser('lynnferguson@niquent.com')).toEqual('Lynn Ferguson');
