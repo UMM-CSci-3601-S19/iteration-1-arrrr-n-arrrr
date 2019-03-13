@@ -28,8 +28,8 @@
       <mat-radio-group flex [(ngModel)]="data.ride.driving" formControlName="driving" required>
         <br>
         I am...
-        <mat-radio-button [value] = "true"> driving</mat-radio-button>
-        <mat-radio-button [value] = "false"> looking for a ride</mat-radio-button>
+        <mat-radio-button id="isDrivingFORM" [value] = "true"> driving</mat-radio-button>
+        <mat-radio-button id="isNotDrivingFORM" [value] = "false"> looking for a ride</mat-radio-button>
         <mat-error *ngFor="let validation of add_ride_validation_messages.driving">
           <mat-error class="error-message" id="driving-error"
                      *ngIf="addRideForm.get('driving').hasError(validation.type) && (addRideForm.get('driving').dirty || addRideForm.get('driving').touched)">
