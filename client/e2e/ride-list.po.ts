@@ -33,23 +33,44 @@ export class RidePage {
     input.sendKeys(destination);
   }
 
+  typeAnOrigin(origin: string) {
+    const input = element(by.id('rideOrigin'));
+    input.click();
+    input.sendKeys(origin);
+  }
+
   selectUpKey() {
     browser.actions().sendKeys(Key.ARROW_UP).perform();
   }
 
-  backspace() {
-    browser.actions().sendKeys(Key.BACK_SPACE).perform();
+  backspace(n: number) {
+
+    let i : number;
+    for ( i = 0; i < n; i++) {
+      browser.actions().sendKeys(Key.BACK_SPACE).perform();
+    }
   }
 
-  getCompany(company: string) {
-    const input = element(by.id('userCompany'));
+  getDriving(isDriving: boolean) {
+    if (isDriving) {
+      const input = element(by.id('isDriving'));
+      input.click();
+      this.click('submit');
+    } else {
+      const input = element(by.id('isNotDriving'));
+      input.click();
+      this.click('submit')
+    }
+  }
+
+  getRidesByDestination() {
+    const input = element(by.id('rideDestination'));
     input.click();
-    input.sendKeys(company);
-    this.click('submit');
+    input.sendKeys(Key.TAB);
   }
 
-  getUserByAge() {
-    const input = element(by.id('userName'));
+  getRidesByOrigin() {
+    const input = element(by.id('rideOrigin'));
     input.click();
     input.sendKeys(Key.TAB);
   }
@@ -57,12 +78,11 @@ export class RidePage {
   getUniqueRide(id: string) {
     const ride = element(by.id(id)).getText();
     this.highlightElement(by.id(id));
-
     return ride;
   }
 
-  getUsers() {
-    return element.all(by.className('users'));
+  getRides() {
+    return element.all(by.className('rides'));
   }
 
   elementExistsWithId(idOfElement: string): promise.Promise<boolean> {
@@ -70,6 +90,14 @@ export class RidePage {
       this.highlightElement(by.id(idOfElement));
     }
     return element(by.id(idOfElement)).isPresent();
+  }
+
+
+  elementExistsWithClass(classOfElement: string): promise.Promise<boolean> {
+    if (element(by.class(classOfElement)).isPresent()) {
+      this.highlightElement(by.class(classOfElement));
+    }
+    return element(by.class(classOfElement)).isPresent();
   }
 
   elementExistsWithCss(cssOfElement: string): promise.Promise<boolean> {
