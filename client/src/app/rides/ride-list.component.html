@@ -1,6 +1,3 @@
-
-<!--We Still need to implement a radio button for submitting driver or rider-->
-
 <div>
   <button id="addNewRide" mat-raised-button (click)="openDialog()">
     <mat-icon style="color: green;">add</mat-icon>
@@ -45,7 +42,7 @@
 
 
         <div *ngIf="rides; else ridesError">
-          <mat-card #elem class="rides" [id]="ride._id"
+          <mat-card #elem class="rides" [id]="ride._id.$oid"
                     *ngFor="let ride of this.filterRides(rideDestination, rideOrigin)"
                     [ngSwitch]="ride.driving">
             <!--<mat-card-title>Destination: {{ride.destination}}</mat-card-title>-->
