@@ -22,7 +22,7 @@
       "$oid": "5c81d9652058a4c037320433"
     },
     "driving": true,
-    "origin": "Morris",
+    "origin": "Osseo",
     "destination": "Teasdale , Minnesota",
     "notes": "Nostrud fugiat fugiat reprehenderit in esse ex amet nisi proident consectetur adipisicing ad. Commodo adipisicing ea anim reprehenderit amet aliqua. Commodo do esse dolore tempor duis in dolor enim mollit deserunt."
   },
@@ -49,7 +49,7 @@
       "$oid": "5c81d965ef997bcce6f0d2e7"
     },
     "driving": false,
-    "origin": "Morris",
+    "origin": "402 West 7th St. Morris, MN",
     "destination": "Titanic , Minnesota",
     "notes": "Pariatur est ea non duis reprehenderit fugiat reprehenderit reprehenderit tempor commodo. Do ullamco irure Lorem nisi aliquip sint. Sint officia eu dolore non minim eu mollit minim. Aute exercitation et qui pariatur culpa do dolore irure."
   },
@@ -59,7 +59,7 @@
     },
     "driving": false,
     "origin": "Morris",
-    "destination": "Woodruff , Minnesota",
+    "destination": "17252 Weaver Lake Drive Maple Grove, MN 55311",
     "notes": "Duis veniam adipisicing cupidatat ex nulla minim minim commodo ex tempor qui ex occaecat. Deserunt nulla ut ad dolor deserunt. Irure consectetur occaecat nisi fugiat sit incididunt tempor nisi aliquip. Deserunt commodo in in reprehenderit nostrud quis magna. Cupidatat est aliquip laboris esse aliqua quis. Ipsum exercitation officia ullamco eu."
   },
   {
@@ -76,8 +76,8 @@
       "$oid": "5c81d965db64b6a0d95905ee"
     },
     "driving": false,
-    "origin": "Morris",
-    "destination": "Enetai , Minnesota",
+    "origin": "campus",
+    "destination": "Willy's Supervalu",
     "notes": "Elit nisi esse aute voluptate ea sint. Exercitation tempor ad consequat nostrud veniam. Nisi labore deserunt aute excepteur excepteur consectetur fugiat. Aliquip sunt proident Lorem voluptate aliquip. Voluptate aliquip eiusmod nulla cupidatat deserunt pariatur eu excepteur ut Lorem excepteur proident tempor. Laboris ut culpa tempor cillum."
   },
   {
@@ -131,7 +131,7 @@
     },
     "driving": false,
     "origin": "Morris",
-    "destination": "Sterling , Minnesota",
+    "destination": "the cities",
     "notes": "Et sunt ipsum in id sunt eiusmod non proident reprehenderit cupidatat amet magna. Ut velit elit irure aliqua. Qui exercitation do id occaecat ad nostrud ipsum mollit consectetur. Culpa cupidatat ipsum excepteur amet velit ut enim est ea velit. Aliquip consequat veniam veniam culpa quis voluptate minim anim excepteur. Ad in consectetur eu eiusmod mollit enim aute nisi aute non anim labore. Officia consequat ipsum consectetur laboris aute enim fugiat laboris sunt do."
   },
   {

@@ -43,18 +43,36 @@ export class RidePage {
     browser.actions().sendKeys(Key.ARROW_UP).perform();
   }
 
-  backspace() {
-    browser.actions().sendKeys(Key.BACK_SPACE).perform();
+  backspace(n: number) {
+
+    let i : number;
+    for ( i = 0; i < n; i++) {
+      browser.actions().sendKeys(Key.BACK_SPACE).perform();
+    }
   }
 
-  getIsDriving(isDriving: boolean) {
+  getDriving(isDriving: boolean) {
     if (isDriving) {
-      const input = element(by.id('driving'));
+      const input = element(by.id('isDriving'));
+      input.click();
+      this.click('submit');
     } else {
-      const input = element(by.id('notDriving'));
+      const input = element(by.id('isNotDriving'));
+      input.click();
+      this.click('submit')
     }
+  }
+
+  getRidesByDestination() {
+    const input = element(by.id('rideDestination'));
     input.click();
-    this.click('submit');
+    input.sendKeys(Key.TAB);
+  }
+
+  getRidesByOrigin() {
+    const input = element(by.id('rideOrigin'));
+    input.click();
+    input.sendKeys(Key.TAB);
   }
 
   getUniqueRide(id: string) {
@@ -72,6 +90,14 @@ export class RidePage {
       this.highlightElement(by.id(idOfElement));
     }
     return element(by.id(idOfElement)).isPresent();
+  }
+
+
+  elementExistsWithClass(classOfElement: string): promise.Promise<boolean> {
+    if (element(by.class(classOfElement)).isPresent()) {
+      this.highlightElement(by.class(classOfElement));
+    }
+    return element(by.class(classOfElement)).isPresent();
   }
 
   elementExistsWithCss(cssOfElement: string): promise.Promise<boolean> {
