@@ -6,8 +6,7 @@ import spark.Request;
 import spark.Response;
 import spark.Route;
 import spark.utils.IOUtils;
-import umm3601.user.UserController;
-import umm3601.user.UserRequestHandler;
+
 import umm3601.ride.RideController;
 import umm3601.ride.RideRequestHandler;
 
@@ -17,18 +16,14 @@ import static spark.debug.DebugScreen.enableDebugScreen;
 import java.io.InputStream;
 
 public class Server {
-  private static final String userDatabaseName = "dev";
-  private static final String rideDatabaseName = "dev"; //maybe unecessary..? //
+  private static final String rideDatabaseName = "dev";
   private static final int serverPort = 4567;
 
   public static void main(String[] args) {
 
     MongoClient mongoClient = new MongoClient();
-    MongoDatabase userDatabase = mongoClient.getDatabase(userDatabaseName);
     MongoDatabase rideDatabase = mongoClient.getDatabase(rideDatabaseName);
 
-    UserController userController = new UserController(userDatabase);
-    UserRequestHandler userRequestHandler = new UserRequestHandler(userController);
 
     RideController rideController = new RideController(rideDatabase);
     RideRequestHandler rideRequestHandler = new RideRequestHandler(rideController);
@@ -67,14 +62,10 @@ public class Server {
 
     get("/", clientRoute);
 
-    /// User Endpoints ///////////////////////////
+    /// Ride Endpoints ///////////////////////////
     /////////////////////////////////////////////
 
-    //List users, filtered using query parameters
-
-    get("api/users", userRequestHandler::getUsers);
-    get("api/users/:id", userRequestHandler::getUserJSON);
-    post("api/users/new", userRequestHandler::addNewUser);
+    //List rides, filtered using query parameters
 
     get("api/rides", rideRequestHandler::getRides);
     get("api/rides/:id", rideRequestHandler::getRideJSON);

@@ -3,7 +3,6 @@ import {RideListService} from './ride-list.service';
 import {Ride} from './ride';
 import {Observable} from 'rxjs/Observable';
 import {MatDialog} from '@angular/material';
-import {MatRadioModule} from '@angular/material/radio';
 import {AddRideComponent} from './add-ride.component';
 
 
@@ -35,10 +34,6 @@ export class RideListComponent implements OnInit {
   isHighlighted(ride: Ride): boolean {
     return ride._id['$oid'] === this.highlightedID;
   }
-
-
-
-  //forbidden zone
 
   openDialog(): void {
     const newRide: Ride = {_id: '', destination: '', origin: '', notes: '', driving: false};

@@ -6,7 +6,6 @@ import {Observable} from 'rxjs/Observable';
 import {FormsModule} from '@angular/forms';
 import {CustomModule} from '../custom.module';
 import {MatDialog} from '@angular/material';
-import {MatRadioModule} from '@angular/material/radio'
 
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
