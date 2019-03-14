@@ -25,21 +25,21 @@ export class AddRideComponent implements OnInit {
       {type: 'required', message: 'Notes are required'},
       {type: 'minlength', message: 'Notes must be at least 3 characters long'},
       {type: 'maxlength', message: 'Notes cannot be more than 100 characters long'},
-      {type: 'pattern', message: 'Destination must contain only numbers, letters, or punctuation'},
+      {type: 'pattern', message: 'Notes must contain only numbers, letters, or punctuation'},
     ],
 
     'destination' : [
       {type: 'required', message: 'Destination is required'},
       {type: 'minlength', message: 'Destination must be at least 3 characters long'},
       {type: 'maxlength', message: 'Destination cannot be more than 30 characters long'},
-      {type: 'pattern', message: 'Destination must contain only numbers, letters, or punctuation'}
+      {type: 'pattern', message: 'Destination must contain only numbers, letters, or punctuation'},
     ],
 
     'origin' : [
       {type: 'required', message: 'Origin is required'},
       {type: 'minlength', message: 'Origin must be at least 3 characters long'},
       {type: 'maxlength', message: 'Origin cannot be more than 30 characters long'},
-      {type: 'pattern', message: 'Origin must contain only numbers, letters, punctuation, or paranthesis'}
+      {type: 'pattern', message: 'Origin must contain only numbers, letters, punctuation, or parenthesis'},
     ],
 
     'driving' : [
@@ -57,21 +57,21 @@ export class AddRideComponent implements OnInit {
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(300),
-        Validators.pattern('[a-zA-Z0-9\\s.?!()\,\'\"\:\;]+'),
+        Validators.pattern('^[\\S]+(\\s\\s{1,2}[\\S]+|\\s{1,2}[\\S]+\\s)*$'),
       ])),
 
       destination: new FormControl('destination', Validators.compose([
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(30),
-        Validators.pattern('[a-zA-Z0-9\\s.?!()\,\'\"]+'),
+        Validators.pattern('^[\\S]+(\\s|\\s{1,2}[\\S]+|\\s{1,2}[\\S]+\\s)*$'),
       ])),
 
       origin: new FormControl('origin', Validators.compose([
         Validators.required,
         Validators.minLength(3),
         Validators.maxLength(30),
-        Validators.pattern('[a-zA-Z0-9\\s.?!()\,\'\"]+'),
+        Validators.pattern('^[\\S]+(\\s\\s{1,2}[\\S]+|\\s{1,2}[\\S]+\\s)*$'),
       ])),
 
       driving: new FormControl('driving', Validators.compose([
@@ -85,5 +85,4 @@ export class AddRideComponent implements OnInit {
   ngOnInit() {
     this.createForms();
   }
-
 }
