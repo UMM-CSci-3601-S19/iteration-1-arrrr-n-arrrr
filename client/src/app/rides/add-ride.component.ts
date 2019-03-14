@@ -56,7 +56,7 @@ export class AddRideComponent implements OnInit {
       notes: new FormControl('notes', Validators.compose([
         Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(300),
+        Validators.maxLength(1500),
         Validators.pattern('^[\\S]+(\\s|\\s{1,2}[\\S]+|\\s{1,2}[\\S]+\\s)*$'),
       ])),
 

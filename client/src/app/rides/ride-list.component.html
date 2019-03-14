@@ -1,7 +1,7 @@
 <div>
   <button id="addNewRide" mat-raised-button (click)="openDialog()">
     <mat-icon style="color: green;">add</mat-icon>
-    Add New Ride</button>
+    Add New Ride Offer or Request</button>
 </div>
 
 
@@ -28,16 +28,9 @@
           <mat-radio-button id="isNotDriving" [value] = "false"> riders</mat-radio-button>
         </mat-radio-group>
 
-        <!--<mat-form-field>-->
-          <!--<input matInput id="rideDriving" #input type="search" placeholder="Search for driver or rider"-->
-                 <!--[(ngModel)]="rideDriving"/>-->
-          <!--<button mat-button id="drivingClearSearch" type="button" *ngIf="rideDriving" matSuffix mat-icon-button-->
-                  <!--aria-label="clear" (click)="rideDriving= ''; loadService()">-->
-            <!--<mat-icon>close</mat-icon>-->
-          <!--</button>-->
-        <!--</mat-form-field>-->
 
-        <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">Submit
+        <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">
+          Filter by driving / riding
         </button>
 
 
@@ -45,7 +38,6 @@
           <mat-card #elem class="rides"
                     *ngFor="let ride of this.filterRides(rideDestination, rideOrigin)"
                     [ngSwitch]="ride.driving">
-            <!--<mat-card-title>Destination: {{ride.destination}}</mat-card-title>-->
             <mat-card-title *ngSwitchDefault style="background: #c2ff87" [id]="ride._id.$oid">
               <mat-icon style="color:green"> drive_eta</mat-icon>
               Driving to: {{ride.destination}}
@@ -60,25 +52,6 @@
           </mat-card>
         </div>
 
-        <!--transer_within_a_station-->
-
-        <!--<mat-accordion *ngIf="rides; else ridesError">
-          <mat-expansion-panel #elem class="rides" [id]="ride._id" [expanded]="this.isHighlighted(ride)"
-                               *ngFor="let ride of this.filterRides(rideDestination, rideOrigin)">
-
-            <mat-expansion-panel-header>
-              <mat-panel-title matTooltip="Destination: {{ride.destination}}"> {{ride.destination}} </mat-panel-title>
-            </mat-expansion-panel-header>
-
-            <mat-panel-description>Destination: {{ride.destination}}</mat-panel-description>
-            <mat-panel-description>Origin: {{ride.origin}} </mat-panel-description>
-            <mat-panel-description>Notes: {{ride.notes}} </mat-panel-description>
-            <mat-panel-description>Is Driving: {{ride.driving}} </mat-panel-description>
-
-          </mat-expansion-panel>
-
-        </mat-accordion>-->
-        <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
         <ng-template #ridesError>
           <mat-error>
             There was a problem loading the rides. Possibly the server is down or perhaps there are network
