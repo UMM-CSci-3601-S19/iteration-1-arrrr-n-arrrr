@@ -1,0 +1,73 @@
+<div class="add-ride">
+  <form  [formGroup]="addRideForm">
+    <h2 mat-dialog-title>New Ride</h2>
+    <mat-dialog-content class = "addRideForm" layout="column">
+
+      <mat-form-field flex>
+        <input matInput #input id="destinationField" placeholder="Destination" [(ngModel)]="data.ride.destination"
+               formControlName="destination" required>
+        <mat-error *ngFor="let validation of add_ride_validation_messages.destination">
+          <mat-error class="error-message" id="destination-error"
+                     *ngIf="addRideForm.get('destination').hasError(validation.type) && (addRideForm.get('destination').dirty || addRideForm.get('destination').touched)">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+      <br>
+
+      <mat-form-field flex>
+        <input matInput #input id="originField" placeholder="Origin" [(ngModel)]="data.ride.origin"
+               formControlName="origin" required>
+        <mat-error *ngFor="let validation of add_ride_validation_messages.origin">
+          <mat-error class="error-message" id="origin-error"
+                     *ngIf="addRideForm.get('origin').hasError(validation.type) && (addRideForm.get('origin').dirty || addRideForm.get('origin').touched)">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+      <br>
+      <br>
+
+      <mat-radio-group flex [(ngModel)]="data.ride.driving" formControlName="driving" required>
+        <br>
+        I am...
+        <br>
+        <br>
+        <mat-radio-button id="isDrivingFORM" [value] = "true"> driving</mat-radio-button>
+        <mat-radio-button id="isNotDrivingFORM" [value] = "false"> looking for a ride</mat-radio-button>
+        <mat-error *ngFor="let validation of add_ride_validation_messages.driving">
+          <mat-error class="error-message" id="driving-error"
+                     *ngIf="addRideForm.get('driving').hasError(validation.type) && (addRideForm.get('driving').dirty || addRideForm.get('driving').touched)">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-radio-group>
+
+      <br>
+
+      <mat-form-field class="notesField">
+        <textarea id="notesField" matInput placeholder="Enter information about your ride offer or request" [(ngModel)]="data.ride.notes"
+                  formControlName="notes"></textarea>
+        <mat-error *ngFor="let validation of add_ride_validation_messages.notes">
+          <mat-error class="error-message" id="notes-error"
+                     *ngIf="addRideForm.get('notes').hasError(validation.type) && (addRideForm.get('notes').dirty || addRideForm.get('notes').touched)">
+            {{validation.message}}
+          </mat-error>
+        </mat-error>
+      </mat-form-field>
+
+    </mat-dialog-content>
+    <mat-dialog-actions layout="row">
+      <!-- [mat-dialog-close]="data.ride" causes the data.ride object to be returned when the dialog is closed. -->
+      <button mat-raised-button id="confirmAddRideButton" [mat-dialog-close]="data.ride" type="button" color="primary"
+              [disabled]="!addRideForm.valid">Add Ride
+      </button>
+      <!-- [mat-dialog-close]="null" causes null to be returned when the dialog is closed. -->
+      <button mat-raised-button id="exitWithoutAddingButton" [mat-dialog-close]="null" type="button">Cancel</button>
+    </mat-dialog-actions>
+  </form>
+</div>
+
