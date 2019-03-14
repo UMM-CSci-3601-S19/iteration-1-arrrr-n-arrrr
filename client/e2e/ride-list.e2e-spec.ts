@@ -302,14 +302,14 @@ describe('Ride list', () => {
         expect(page.getTextFromField('notes-error')).toBe('Notes are required');
       });
 
-      it('Should show the validation error message about notes being too larger if longer than 300 characters', () => {
+      it('Should show the validation error message about notes being too larger if longer than 1500 characters', () => {
         expect(element(by.id('notesField')).isPresent()).toBeTruthy('There should be a notes field');
         page.field('notesField').clear();
         page.typeManyNotes();
         expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
         //clicking somewhere else will make the error appear
         page.field('destinationField').click();
-        expect(page.getTextFromField('notes-error')).toBe('Notes cannot be more than 300 characters long');
+        expect(page.getTextFromField('notes-error')).toBe('Notes must be less than 1500 characters');
       });
 
 
