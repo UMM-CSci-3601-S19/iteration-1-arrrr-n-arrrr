@@ -174,7 +174,6 @@ describe('Ride list', () => {
 
       expect(page.elementExistsWithClass('rides')).toBe(true);
 
-      // left off //
 
     });
   });
