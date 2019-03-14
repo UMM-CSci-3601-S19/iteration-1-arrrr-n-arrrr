@@ -26,8 +26,8 @@
 
         <mat-radio-group class="radioGroup" [(ngModel)] = "rideDriving">
           I am looking for...
-          <mat-radio-button id="isDriving" [value] = "true"> drivers</mat-radio-button>
-          <mat-radio-button id="isNotDriving" [value] = "false"> riders</mat-radio-button>
+          <mat-radio-button id="isDriving" [value] = "true"> <mat-icon style="color:green"> drive_eta</mat-icon> drivers</mat-radio-button>
+          <mat-radio-button id="isNotDriving" [value] = "false"> <mat-icon style="color: blue"> transfer_within_a_station </mat-icon> riders</mat-radio-button>
         </mat-radio-group>
 
         <br>
@@ -42,10 +42,12 @@
           <mat-card #elem class="rides"
                     *ngFor="let ride of this.filterRides(rideDestination, rideOrigin)"
                     [ngSwitch]="ride.driving">
+
             <mat-card-title *ngSwitchDefault style="background: #c2ff87" [id]="ride._id.$oid">
               <mat-icon style="color:green"> drive_eta</mat-icon>
               Driving to: {{ride.destination}}
             </mat-card-title>
+
             <mat-card-title *ngSwitchCase=false style="background: #80ffff" [id]="ride._id.$oid">
               <mat-icon style="color: blue"> transfer_within_a_station </mat-icon>
               Needs a ride to: {{ride.destination}}
