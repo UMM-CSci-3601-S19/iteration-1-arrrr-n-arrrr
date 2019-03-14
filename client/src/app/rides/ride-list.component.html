@@ -42,15 +42,15 @@
 
 
         <div *ngIf="rides; else ridesError">
-          <mat-card #elem class="rides" [id]="ride._id.$oid"
+          <mat-card #elem class="rides"
                     *ngFor="let ride of this.filterRides(rideDestination, rideOrigin)"
                     [ngSwitch]="ride.driving">
             <!--<mat-card-title>Destination: {{ride.destination}}</mat-card-title>-->
-            <mat-card-title *ngSwitchDefault style="background: #c2ff87">
+            <mat-card-title *ngSwitchDefault style="background: #c2ff87" [id]="ride._id.$oid">
               <mat-icon style="color:green"> drive_eta</mat-icon>
               Driving to: {{ride.destination}}
             </mat-card-title>
-            <mat-card-title *ngSwitchCase=false style="background: #80ffff">
+            <mat-card-title *ngSwitchCase=false style="background: #80ffff" [id]="ride._id.$oid">
               <mat-icon style="color: blue"> transfer_within_a_station </mat-icon>
               Needs a ride to: {{ride.destination}}
             </mat-card-title>

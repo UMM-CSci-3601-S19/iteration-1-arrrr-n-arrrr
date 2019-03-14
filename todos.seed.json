@@ -19,6 +19,15 @@
   },
   {
     "_id": {
+      "$oid": "58af3a600343927e48e87210"
+    },
+    "owner": "Fry",
+    "status": false,
+    "body": "Ipsum esse est ullamco magna tempor anim laborum non officia deserunt veniam commodo. Aute minim incididunt ex commodo.",
+    "category": "video games"
+  },
+  {
+    "_id": {
       "$oid": "58af3a600343927e48e87211"
     },
     "owner": "Fry",

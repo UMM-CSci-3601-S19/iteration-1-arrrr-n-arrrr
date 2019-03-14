@@ -42,12 +42,12 @@ describe('Ride list', () => {
     // Here is a result on the page
 
 
-    expect(page.getUniqueRide('5c81d965e9106fdc1a0cd630')).toEqual('Needs a ride to: Ada , Minnesota');
+    expect(page.getUniqueRide('5c81d965e9106fdc1a0cd630')).toEqual('transfer_within_a_station Needs a ride to: Ada , Minnesota');
 
     page.typeADestination('ore');
     // This should gives a 3 rides (2 offers and 1 request). The top result is no longer there.
-    expect(page.getUniqueRide('5c81d96523def802a96be651')).toEqual('Driving to: Fillmore , Minnesota');
-    expect(page.getUniqueRide('5c81d96596f249966d2f1ee8')).toEqual('Needs a ride to: Forestburg , Minnesota');
+    expect(page.getUniqueRide('5c81d96523def802a96be651')).toEqual('drive_eta Driving to: Fillmore , Minnesota');
+    expect(page.getUniqueRide('5c81d96596f249966d2f1ee8')).toEqual('transfer_within_a_station Needs a ride to: Forestburg , Minnesota');
 
 
 
@@ -58,48 +58,58 @@ describe('Ride list', () => {
     page.typeADestination('ore');
     // That should now make the search bar contain 'oreore'. There should no longer be any rides displaying.
     // We test this by ensuring no element of class 'rides' exists
-    expect(page.elementExistsWithClass('rides')).toBe(false);
-
+    //expect(page.elementExistsWithClass('mat-card-title ng-star-inserted')).toBeFalsy();
+    page.getRides().then((rides) => {
+      expect(rides.length).toBe(0);
+    });
     // Now we clear the search field and see that our first result is back.
     page.backspace(6);
-    expect(page.getUniqueRide('5c81d965e9106fdc1a0cd630')).toEqual('Needs a ride to: Ada , Minnesota');
+    expect(page.getUniqueRide('5c81d965e9106fdc1a0cd630')).toEqual('transfer_within_a_station Needs a ride to: Ada , Minnesota');
   });
 
 
   it('should type something in filter origin box and check that it returned correct elements', () => {
     page.navigateTo();
 
-    // This ride origins from these results are 'Osseo', 'Morris', and 'campus' (respectively)
-    expect(page.getUniqueRide('5c81d9652058a4c037320433')).toEqual('Driving to: Teasdale , Minnesota');
-    expect(page.getUniqueRide('5c81d965c015b6bade4d1d80')).toEqual('Needs a ride to: Ahwahnee , Minnesota');
-    expect(page.getUniqueRide('5c81d965db64b6a0d95905ee')).toEqual('Needs a ride to: Willy\'s Supervalu');
+    // This ride origins from these results are 'Osseo', 'Osceola, WI', and 'campus' (respectively)
+    expect(page.getUniqueRide('5c81d9652058a4c037320433')).toEqual('drive_eta Driving to: Teasdale , Minnesota');
+    expect(page.getUniqueRide('5c81d965680b7806d09766b8')).toEqual('transfer_within_a_station Needs a ride to: 17252 Weaver Lake Drive Maple Grove, MN 55311');
+    expect(page.getUniqueRide('5c81d965db64b6a0d95905ee')).toEqual('transfer_within_a_station Needs a ride to: Willy\'s Supervalu');
 
 
 
 
-    page.typeAnOrigin('m');
+    page.typeAnOrigin('os');
     // The posting with origin of Osseo should no longer be on the list
-    expect(page.elementExistsWithId('5c81d9652058a4c037320433')).toBe(false); // Osseo
-    expect(page.elementExistsWithId('5c81d965c015b6bade4d1d80')).toBe(true); // Morris
-    expect(page.elementExistsWithId('5c81d965db64b6a0d95905ee')).toBe(true); // campus
+    //expect(page.elementExistsWithId('5c81d9652058a4c037320433')).not.toBe(true); // Osseo
+    page.getRides().then((rides) => {
+      expect(rides.length).toBe(2);
+    });
+    expect(page.elementExistsWithId('5c81d9652058a4c037320433')).toBe(true); // Osseo
+    expect(page.elementExistsWithId('5c81d965680b7806d09766b8')).toBe(true); // Osceola, WI
 
 
 
 
 
-    page.typeAnOrigin('o'); //origin input is now 'mo'
+    page.typeAnOrigin('s'); //origin input is now 'mo'
     // The posting with origin of 'campus' should no longer exist
-    expect(page.elementExistsWithId('5c81d965c015b6bade4d1d80')).toBe(true); // Morris
-    expect(page.elementExistsWithId('5c81d965db64b6a0d95905ee')).toBe(false); // campus
+    expect(page.elementExistsWithId('5c81d9652058a4c037320433')).toBe(true); // Osseo
+    //expect(page.elementExistsWithId('5c81d965db64b6a0d95905ee')).toBe(false); // campus
+    page.getRides().then((rides) => {
+      expect(rides.length).toBe(1);
+    });
 
     page.typeAnOrigin('oasd'); //origin input is now 'mooasd'. There are no longer any rides displayed
     // We test this by ensuring no element of class 'rides' exists
-    expect(page.elementExistsWithClass('rides')).toBe(false);
+    page.getRides().then((rides) => {
+      expect(rides.length).toBe(0);
+    });
 
     // Now we clear the search field and see that our results are back.
-    page.backspace(6);
+    page.backspace(7);
     expect(page.elementExistsWithId('5c81d9652058a4c037320433')).toBe(true); // Osseo
-    expect(page.elementExistsWithId('5c81d965c015b6bade4d1d80')).toBe(true); // Morris
+    expect(page.elementExistsWithId('5c81d965680b7806d09766b8')).toBe(true); // Osceola, WI
     expect(page.elementExistsWithId('5c81d965db64b6a0d95905ee')).toBe(true); // campus
   });
 
@@ -158,7 +168,9 @@ describe('Ride list', () => {
       page.click('confirmAddRideButton');
       page.typeADestination('North Pole');
       page.typeAnOrigin('South Pole');
-      expect(page.getRides().length).toBe(1);
+      page.getRides().then((rides) => {
+        expect(rides.length ===1);
+      });
 
       expect(page.elementExistsWithClass('rides')).toBe(true);
 
@@ -166,87 +178,159 @@ describe('Ride list', () => {
 
     });
   });
-});
 
-    /*describe('Add User (Validation)', () => {
+
+    describe('Add Ride (Validation)', () => {
+
+      beforeEach( () => {
+        page.click('addNewRide')
+      });
 
       afterEach(() => {
         page.click('exitWithoutAddingButton');
       });
 
-      it('Should allow us to put information into the fields of the add user dialog', () => {
-        expect(page.field('nameField').isPresent()).toBeTruthy('There should be a name field');
-        page.field('nameField').sendKeys('Dana Jones');
-        expect(element(by.id('ageField')).isPresent()).toBeTruthy('There should be an age field');
-        // Need to clear this field because the default value is -1.
-        page.field('ageField').clear();
-        page.field('ageField').sendKeys('24');
-        expect(page.field('companyField').isPresent()).toBeTruthy('There should be a company field');
-        page.field('companyField').sendKeys('Awesome Startup, LLC');
-        expect(page.field('emailField').isPresent()).toBeTruthy('There should be an email field');
-        page.field('emailField').sendKeys('dana@awesome.com');
+      it('Should allow us to put information into the fields of the add ride dialog', () => {
+
+        expect(page.field('destinationField').isPresent()).toBeTruthy('There should be a destination field');
+        page.field('destinationField').sendKeys('North Pole');
+
+        expect(element(by.id('originField')).isPresent()).toBeTruthy('There should be an origin field');
+        page.field('originField').sendKeys('South Pole');
+
+        expect(page.field('notesField').isPresent()).toBeTruthy('There should be a notes field');
+        page.field('notesField').sendKeys('I will pay for gas!!!?');
+
+        expect(page.elementExistsWithId('isDrivingFORM')).toBeTruthy('There should be a is driving radio button');
+        element(by.id('isDrivingFORM')).click();
+
+        expect(page.elementExistsWithId('isNotDrivingFORM')).toBeTruthy('There should be a is driving radio button');
+        element(by.id('isNotDrivingFORM')).click();
       });
 
-      it('Should show the validation error message about age being too small if the age is less than 15', () => {
-        expect(element(by.id('ageField')).isPresent()).toBeTruthy('There should be an age field');
-        page.field('ageField').clear();
-        page.field('ageField').sendKeys('2');
-        expect(page.button('confirmAddUserButton').isEnabled()).toBe(false);
+
+      ////////////////////////////////////////////////////////
+      ////////////////  Destination validation ///////////////
+      ////////////////////////////////////////////////////////
+
+      it('Should show the validation error message about destination being too small if smaller than 3 characters', () => {
+        expect(page.elementExistsWithId('destinationField')).toBeTruthy('There should be a destination field');
+        page.field('destinationField').clear();
+        page.field('destinationField').sendKeys('t');
+        expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
         //clicking somewhere else will make the error appear
-        page.field('nameField').click();
-        expect(page.getTextFromField('age-error')).toBe('Age must be at least 15');
+        page.field('originField').click();
+        expect(page.getTextFromField('destination-error')).toBe('Destination must be at least 3 characters long');
       });
 
-      it('Should show the validation error message about age being required', () => {
-        expect(element(by.id('ageField')).isPresent()).toBeTruthy('There should be an age field');
-        page.field('ageField').clear();
-        expect(page.button('confirmAddUserButton').isEnabled()).toBe(false);
+      it('Should show the validation error message about destination being required', () => {
+        expect(element(by.id('destinationField')).isPresent()).toBeTruthy('There should be a destination field');
+        page.field('destinationField').clear();
+        expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
         //clicking somewhere else will make the error appear
-        page.field('nameField').click();
-        expect(page.getTextFromField('age-error')).toBe('Age is required');
+        page.field('originField').click();
+        expect(page.getTextFromField('destination-error')).toBe('Destination is required');
       });
 
-      it('Should show the validation error message about name being required', () => {
-        expect(element(by.id('nameField')).isPresent()).toBeTruthy('There should be a name field');
+      it('Should show the validation error message about destination being too larger if longer than 50 characters', () => {
+        expect(element(by.id('destinationField')).isPresent()).toBeTruthy('There should be a destination field');
+        page.field('destinationField').clear();
+        page.field('destinationField').sendKeys('12345678901234567890123456789012345678901234567980145');
+        expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
+        //clicking somewhere else will make the error appear
+        page.field('originField').click();
+        expect(page.getTextFromField('destination-error')).toBe('Destination cannot be more than 50 characters long');
+      });
+
+
+      ////////////////////////////////////////////////////////
+      ////////////////  Origin validation      ///////////////
+      ////////////////////////////////////////////////////////
+
+
+      it('Should show the validation error message about origin being too small if smaller than 3 characters', () => {
+        expect(element(by.id('originField')).isPresent()).toBeTruthy('There should be a origin field');
+        page.field('originField').clear();
+        page.field('originField').sendKeys('t');
+        expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
+        //clicking somewhere else will make the error appear
+        page.field('destinationField').click();
+        expect(page.getTextFromField('origin-error')).toBe('Origin must be at least 3 characters long');
+      });
+
+      it('Should show the validation error message about origin being required', () => {
+        expect(element(by.id('originField')).isPresent()).toBeTruthy('There should be a origin field');
+        page.field('originField').clear();
+        expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
+        //clicking somewhere else will make the error appear
+        page.field('originField').click();
+        page.field('destinationField').click();
+        expect(page.getTextFromField('origin-error')).toBe('Origin is required');
+      });
+
+      it('Should show the validation error message about origin being too larger if longer than 50 characters', () => {
+        expect(element(by.id('originField')).isPresent()).toBeTruthy('There should be a origin field');
+        page.field('originField').clear();
+        page.field('originField').sendKeys('12345678901234567890123456789012345678901234567980145');
+        expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
+        //clicking somewhere else will make the error appear
+        page.field('destinationField').click();
+        expect(page.getTextFromField('origin-error')).toBe('Origin cannot be more than 50 characters long');
+      });
+
+
+      ////////////////////////////////////////////////////////
+      ////////////////  Notes validation       ///////////////
+      ////////////////////////////////////////////////////////
+
+
+      it('Should show the validation error message about notes being too small if smaller than 3 characters', () => {
+        expect(element(by.id('notesField')).isPresent()).toBeTruthy('There should be a notes field');
+        page.field('notesField').clear();
+        page.field('notesField').sendKeys('t');
+        expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
+        page.field('originField').click();
+        expect(page.getTextFromField('notes-error')).toBe('Notes must be at least 3 characters long');
+      });
+
+      it('Should show the validation error message about notes being required', () => {
+        expect(element(by.id('notesField')).isPresent()).toBeTruthy('There should be a notes field');
+        page.field('notesField').clear();
+        expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
+        //clicking somewhere else will make the error appear
+        page.field('notesField').click();
+        page.field('originField').click();
+        expect(page.getTextFromField('notes-error')).toBe('Notes are required');
+      });
+
+      it('Should show the validation error message about notes being too larger if longer than 300 characters', () => {
+        expect(element(by.id('notesField')).isPresent()).toBeTruthy('There should be a notes field');
+        page.field('notesField').clear();
+        page.typeManyNotes();
+        expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
+        //clicking somewhere else will make the error appear
+        page.field('destinationField').click();
+        expect(page.getTextFromField('notes-error')).toBe('Notes cannot be more than 300 characters long');
+      });
+
+
+      ////////////////////////////////////////////////////////
+      /////////////  Driving/riding validation ////////////////
+      ////////////////////////////////////////////////////////
+
+      it('Should show the validation error message about notes being required', () => {
+        expect(element(by.id('notesField')).isPresent()).toBeTruthy('There should be a notes field');
         // '\b' is a backspace, so this enters an 'A' and removes it so this
         // field is "dirty", i.e., it's seen as having changed so the validation
         // tests are run.
-        page.field('nameField').sendKeys('A\b');
-        expect(page.button('confirmAddUserButton').isEnabled()).toBe(false);
+        page.field('notesField').sendKeys('A\b');
+        expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
         //clicking somewhere else will make the error appear
-        page.field('ageField').click();
-        expect(page.getTextFromField('name-error')).toBe('Name is required');
+        page.field('destinationField').click();
+        expect(page.getTextFromField('notes-error')).toBe('Notes are required');
       });
 
-      it('Should show the validation error message about the format of name', () => {
-        expect(element(by.id('nameField')).isPresent()).toBeTruthy('There should be an name field');
-        page.field('nameField').sendKeys('Don@ld Jones');
-        expect(page.button('confirmAddUserButton').isEnabled()).toBe(false);
-        //clicking somewhere else will make the error appear
-        page.field('ageField').click();
-        expect(page.getTextFromField('name-error')).toBe('Name must contain only numbers and letters');
-      });
 
-      it('Should show the validation error message about the name being taken', () => {
-        expect(element(by.id('nameField')).isPresent()).toBeTruthy('There should be an name field');
-        page.field('nameField').sendKeys('abc123');
-        expect(page.button('confirmAddUserButton').isEnabled()).toBe(false);
-        //clicking somewhere else will make the error appear
-        page.field('ageField').click();
-        expect(page.getTextFromField('name-error')).toBe('Name has already been taken');
-      });
-
-      it('Should show the validation error message about email format', () => {
-        expect(element(by.id('emailField')).isPresent()).toBeTruthy('There should be an email field');
-        page.field('nameField').sendKeys('Donald Jones');
-        page.field('ageField').sendKeys('30');
-        page.field('emailField').sendKeys('donjones.com');
-        expect(page.button('confirmAddUserButton').isEnabled()).toBe(false);
-        //clicking somewhere else will make the error appear
-        page.field('nameField').click();
-        expect(page.getTextFromField('email-error')).toBe('Email must be formatted properly');
-      });*/
-/*    });
+    });
   });
-});*/
 
