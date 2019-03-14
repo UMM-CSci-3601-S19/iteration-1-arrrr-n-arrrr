@@ -76,7 +76,7 @@ public class MongoRideSpec {
 
   @Test
   public void shouldBeOneFromEarth() {
-    FindIterable<Document> documents = rideDocuments.find(gt("origin", "Earth"));
+    FindIterable<Document> documents = rideDocuments.find(eq("origin", "Earth"));
     int numberOfRides = countRides(documents);
     assertEquals("Should be 1 from Earth", 1, numberOfRides);
   }
@@ -137,7 +137,7 @@ public class MongoRideSpec {
       .projection(fields(include("destination", "notes"), excludeId()));
     List<Document> docs = intoList(documents);
     assertEquals("Should be 3", 3, docs.size());
-    assertEquals("First should be from Earth", "Earth", docs.get(0).get("origin"));
+    assertEquals("First should be to Mars", "Mars", docs.get(0).get("destination"));
     assertNotNull("First should have destination", docs.get(0).get("destination"));
     assertNull("First shouldn't have 'driving'", docs.get(0).get("driving"));
     assertNull("First shouldn't have 'origin'", docs.get(0).get("origin"));

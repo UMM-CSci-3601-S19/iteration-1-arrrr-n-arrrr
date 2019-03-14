@@ -23,7 +23,6 @@ export class RidePage {
   getRideTitle() {
     const title = element(by.id('ride-list-title')).getText();
     this.highlightElement(by.id('ride-list-title'));
-
     return title;
   }
 
@@ -37,6 +36,24 @@ export class RidePage {
     const input = element(by.id('rideOrigin'));
     input.click();
     input.sendKeys(origin);
+  }
+
+  typeManyNotes() {
+    const input = element(by.id('notesField'));
+    input.click();
+    input.sendKeys("The history of all hitherto existing society(2) is the history of class struggles.\n" +
+      "\n" +
+      "Freeman and slave, patrician and plebeian, lord and serf, guild-master(3) and journeyman, in a word, oppressor and oppressed, stood in constant opposition to one another, carried on an uninterrupted, now hidden, now open fight, a fight that each time ended, either in a revolutionary reconstitution of society at large, or in the common ruin of the contending classes.\n" +
+      "\n" +
+      "In the earlier epochs of history, we find almost everywhere a complicated arrangement of society into various orders, a manifold gradation of social rank. In ancient Rome we have patricians, knights, plebeians, slaves; in the Middle Ages, feudal lords, vassals, guild-masters, journeymen, apprentices, serfs; in almost all of these classes, again, subordinate gradations.\n" +
+      "\n" +
+      "The modern bourgeois society that has sprouted from the ruins of feudal society has not done away with class antagonisms. It has but established new classes, new conditions of oppression, new forms of struggle in place of the old ones.\n" +
+      "\n" +
+      "Our epoch, the epoch of the bourgeoisie, possesses, however, this distinct feature: it has simplified class antagonisms. Society as a whole is more and more splitting up into two great hostile camps, into two great classes directly facing each other — Bourgeoisie and Proletariat.\n" +
+      "\n" +
+      "From the serfs of the Middle Ages sprang the chartered burghers of the earliest towns. From these burgesses the first elements of the bourgeoisie were developed.\n" +
+      "\n" +
+      "The discovery of America, the rounding of the Cape, opened up fresh ground for the rising bourgeoisie. The East-Indian and Chinese markets, the colonisation of America, trade with the colonies, the increase in the means of exchange and in commodities generally, gave to commerce, to navigation, to industry, an impulse never before known, and thereby, to the revolutionary element in the tottering feudal society, a rapid development.");
   }
 
   selectUpKey() {
@@ -68,6 +85,14 @@ export class RidePage {
     input.click();
     input.sendKeys(Key.TAB);
   }
+
+  typeCharacters(n :number) {
+    let i: number;
+    for (i = 0; i < n; i++) {
+      browser.actions().sendKeys('r').perform();
+    }
+  }
+
 
   getRidesByOrigin() {
     const input = element(by.id('rideOrigin'));

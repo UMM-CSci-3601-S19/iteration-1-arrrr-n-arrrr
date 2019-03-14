@@ -38,8 +38,8 @@
         </mat-error>
       </mat-radio-group>
 
-      <mat-form-field class="rideNoteField">
-        <textarea matInput placeholder="Enter information about your ride offer or request" [(ngModel)]="data.ride.notes"
+      <mat-form-field class="notesField">
+        <textarea id="notesField" matInput placeholder="Enter information about your ride offer or request" [(ngModel)]="data.ride.notes"
                   formControlName="notes"></textarea>
         <!--<input matInput #input id="notesField" placeholder="Enter iformation about your ride" [(ngModel)]="data.ride.notes"-->
                <!--formControlName="notes" required>-->

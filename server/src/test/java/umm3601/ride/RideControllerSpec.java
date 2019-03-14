@@ -101,7 +101,7 @@ public class RideControllerSpec {
       .map(RideControllerSpec::getDestination)
       .sorted()
       .collect(Collectors.toList());
-    List<String> expectedDestinations = Arrays.asList("North Pole", "Brazil", "China", "North Pole");
+    List<String> expectedDestinations = Arrays.asList("Brazil","China","North Pole", "North Pole");
     assertEquals("Names should match", expectedDestinations, destinations);
   }
 
@@ -178,7 +178,7 @@ public class RideControllerSpec {
       .map(RideControllerSpec::getOrigin)
       .sorted()
       .collect(Collectors.toList());
-    List<String> expectedOrigin = Arrays.asList("Cananda","Japan");
+    List<String> expectedOrigin = Arrays.asList("Canada","Japan");
     assertEquals("Origins should match", expectedOrigin, origin);
 
   }
