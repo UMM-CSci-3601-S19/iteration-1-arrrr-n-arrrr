@@ -22,14 +22,18 @@
                  (input)="rideOrigin = $event.target.value">
         </mat-form-field>
 
-        <mat-radio-group [(ngModel)] = "rideDriving">
+        <br>
+
+        <mat-radio-group class="radioGroup" [(ngModel)] = "rideDriving">
           I am looking for...
           <mat-radio-button id="isDriving" [value] = "true"> drivers</mat-radio-button>
           <mat-radio-button id="isNotDriving" [value] = "false"> riders</mat-radio-button>
         </mat-radio-group>
 
+        <br>
 
-        <button mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">
+
+        <button class="filterButton" mat-raised-button id="submit" color="primary" #input type="button" (click)="loadService()">
           Filter by driving / riding
         </button>
 
