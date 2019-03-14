@@ -212,14 +212,14 @@ describe('Ride list', () => {
       ////////////////  Destination validation ///////////////
       ////////////////////////////////////////////////////////
 
-      it('Should show the validation error message about destination being too small if smaller than 3 characters', () => {
+      it('Should show the validation error message about destination being too small if smaller than 2 characters', () => {
         expect(page.elementExistsWithId('destinationField')).toBeTruthy('There should be a destination field');
         page.field('destinationField').clear();
         page.field('destinationField').sendKeys('t');
         expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
         //clicking somewhere else will make the error appear
         page.field('originField').click();
-        expect(page.getTextFromField('destination-error')).toBe('Destination must be at least 3 characters long');
+        expect(page.getTextFromField('destination-error')).toBe('Destination must be at least 2 characters long');
       });
 
       it('Should show the validation error message about destination being required', () => {
@@ -247,14 +247,14 @@ describe('Ride list', () => {
       ////////////////////////////////////////////////////////
 
 
-      it('Should show the validation error message about origin being too small if smaller than 3 characters', () => {
+      it('Should show the validation error message about origin being too small if smaller than 2 characters', () => {
         expect(element(by.id('originField')).isPresent()).toBeTruthy('There should be a origin field');
         page.field('originField').clear();
         page.field('originField').sendKeys('t');
         expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
         //clicking somewhere else will make the error appear
         page.field('destinationField').click();
-        expect(page.getTextFromField('origin-error')).toBe('Origin must be at least 3 characters long');
+        expect(page.getTextFromField('origin-error')).toBe('Origin must be at least 2 characters long');
       });
 
       it('Should show the validation error message about origin being required', () => {
@@ -283,13 +283,13 @@ describe('Ride list', () => {
       ////////////////////////////////////////////////////////
 
 
-      it('Should show the validation error message about notes being too small if smaller than 3 characters', () => {
+      it('Should show the validation error message about notes being too small if smaller than 2 characters', () => {
         expect(element(by.id('notesField')).isPresent()).toBeTruthy('There should be a notes field');
         page.field('notesField').clear();
         page.field('notesField').sendKeys('t');
         expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
         page.field('originField').click();
-        expect(page.getTextFromField('notes-error')).toBe('Notes must be at least 3 characters long');
+        expect(page.getTextFromField('notes-error')).toBe('Notes must be at least 2 characters long');
       });
 
       it('Should show the validation error message about notes being required', () => {
@@ -309,7 +309,7 @@ describe('Ride list', () => {
         expect(page.button('confirmAddRideButton').isEnabled()).toBe(false);
         //clicking somewhere else will make the error appear
         page.field('destinationField').click();
-        expect(page.getTextFromField('notes-error')).toBe('Notes must be less than 1500 characters');
+        expect(page.getTextFromField('notes-error')).toBe('Notes cannot be more than 1500 characters long');
       });
 
 
